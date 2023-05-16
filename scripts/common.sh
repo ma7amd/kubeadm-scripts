@@ -6,10 +6,11 @@ set -euxo pipefail
 
 # Variable Declaration
 
-KUBERNETES_VERSION="1.26.1-00"
+KUBERNETES_VERSION="1.27.1-00"
 
 # disable swap
 sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
 # keeps the swaf off during reboot
 (crontab -l 2>/dev/null; echo "@reboot /sbin/swapoff -a") | crontab - || true
